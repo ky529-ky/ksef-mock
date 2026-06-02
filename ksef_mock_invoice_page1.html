@@ -1,0 +1,183 @@
+<html lang="en"><head>
+    <meta charset="utf-8">
+    <title>KSeF</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <base href="/client-app/">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Material+Icons+Outlined" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/choices.js/10.2.0/choices.min.css">
+    <link rel="stylesheet" href="app.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/choices.js/10.2.0/choices.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.3/jquery.validate.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validation-unobtrusive/3.2.12/jquery.validate.unobtrusive.js"></script>
+</head>
+<body>
+    <header class="akmf-header-simple" tabindex="-1">
+        <img class="akmf-header-simple__eagle" src="assets/img/red-eagle.svg">
+        <span class="akmf-header-simple__title">
+            Krajowy System <span class="text-red">e</span>
+            <span class="text-bold">-Faktur</span>
+        </span>
+    </header>
+    <br>
+    <div class="akmf-main-content akmf-main-content__content">
+
+        <main class="akmf-main-content__content--wrapper" tabindex="-1">
+            
+
+
+
+
+        <div class="tilte-container">
+            <h1>
+                Dostęp do faktur
+            </h1>
+            <p>
+                Zobacz fakturę wystawioną w Krajowym Systemie e-Faktur bez
+                konieczności logowania.
+            </p>
+        </div>
+        <akmf-alert akmf-alert-design-mode="design-1">
+            <div class="akmf-alert akmf-alert--success">
+                <div class="akmf-alert__title--wrapper">
+                    <span class="title__icon title__icon--left title__icon--left-success">
+                        check_circle_outline
+                    </span>
+                    <div class="akmf-alert__title h6">Faktura znajduje się w KSeF</div>
+                </div>
+            </div>
+        </akmf-alert>
+        <p style="font-size: 32px">Informacje o fakturze</p>
+        <div class="invoice-details">
+            <div class="row">
+                <div class="info">
+                    <span class="label">Numer KSeF</span>
+                    <span class="text">5860020200-20260210-010000D3675E-EB</span>
+                </div>
+                <div class="info">
+                    <span class="label">NIP sprzedawcy</span>
+                    <span class="text">5860020200</span>
+                </div>
+                <div class="info">
+                    <span class="label">Data wystawienia faktury</span>
+                    <span class="text">10.02.2026</span>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="info">
+                    <span class="label">Skrót dokumentu</span>
+                    <span class="text">H9jP1XfuRRGwDmpV2Z4pi36Zr7EzOg85EJz5Kv+cEg8=</span>
+                </div>
+                <div class="info">
+                    <span class="label">Data nadania nr KSeF</span>
+                    <span class="text">10.02.2026</span>
+                </div>
+                <div class="info">
+                    <span class="label">Typ schemy</span>
+                    <span class="text">FA (3)</span>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="info">
+                    <span class="label">Tryb wystawienia faktury</span>
+                    <span class="text">Online</span>
+                </div>
+                <div class="info">
+                    <span class="label">Dokument przesłany do KSeF jest zgodny z dokumentem, dla którego wygenerowano link weryfikacyjny </span>
+                    <span class="text">Tak</span>
+                </div>
+                <div class="info">
+                </div>
+            </div>
+        </div>
+        <form method="post">
+            
+            <input type="hidden" id="Nip" name="Nip" value="5860020200">
+            <input type="hidden" id="IssueDate" name="IssueDate" value="10-02-2026">
+            <input type="hidden" id="InvoiceHash" name="InvoiceHash" value="H9jP1XfuRRGwDmpV2Z4pi36Zr7EzOg85EJz5Kv-cEg8">
+            <input type="hidden" id="KsefNumber" name="KsefNumber" value="5860020200-20260210-010000D3675E-EB">
+            <div>
+                <button type="submit" style="margin-left: 0px;" class="akmf-btn-main">
+                    Przejdź do pobierania
+                </button>
+            </div>
+        <input name="__RequestVerificationToken" type="hidden" value="CfDJ8BW0GgtUQZNFr79HKBP3DDNaKOYiwxAGhjp-quLGT1CY6MDV1nv0Vr57Kxa00pLt6LnBoBXNnhldGsRWntt5AsD6NN2Zlz9KTCaPh5LeXd9EqiPJEPMFr86QfWxa34f2PPmyMd4RgAo9bOBOQNUbmDU"></form>
+
+        </main>
+
+        <akmf-footer>
+            <footer tabindex="-1" id="akmf-app-footer" class="akmf-footer__footer">
+                <div class="akmf-footer__container">
+
+                    <div class="akmf-footer__logo-container">
+                        <a target="_blank" href="https://www.gov.pl/web/finanse/" class="akmf-footer__logo">
+                            <img src="assets/img/mf-brand.svg" alt="Logo Ministerstwa Finansów">
+                        </a>
+                        <a target="_blank" href="https://www.gov.pl/web/kas/" class="akmf-footer__logo">
+                            <img src="assets/img/kas-brand.svg" alt="Logo Krajowej Administracji Skarbowej">
+                        </a>
+                    </div>
+
+                    <div class="akmf-footer__links-container">
+                        <ul class="akmf-footer__links">
+                            <li class="akmf-footer__links-item">
+                                <a class="akmf-footer__link" href="https://ap-demo.ksef.mf.gov.pl/web/site-map" )"="" target="_self" title="Przejdź do mapy strony" rel="opener">
+                                    Mapa strony
+                                </a>
+                            </li>
+                            <li class="akmf-footer__links-item">
+                                <a class="akmf-footer__link" href="https://ap-demo.ksef.mf.gov.pl/web/wcag-declaration" target="_blank" title="Otworzy się w nowej karcie" rel="noopener">
+                                    Deklaracja dostępności serwisu
+                                </a>
+                            </li>
+                            <li class="akmf-footer__links-item">
+                                <a class="akmf-footer__link" href="https://ap-demo.ksef.mf.gov.pl/web/cookies-policy" target="_blank" title="Otworzy się w nowej karcie" rel="noopener">
+                                    Polityka Cookie
+                                </a>
+                            </li>
+                            <li class="akmf-footer__links-item">
+                                <a class="akmf-footer__link" href="https://ap-demo.ksef.mf.gov.pl/web/kas-clause" target="_blank" title="Otworzy się w nowej karcie" rel="noopener">
+                                    Klauzula informacyjna Szefa Krajowej Administracji Skarbowej
+                                </a>
+                            </li>
+                            <li class="akmf-footer__links-item">
+                                <a class="akmf-footer__link" href="https://www.gov.pl/web/finanse/informacja-o-dzialalnosci-ministerstwa" target="_blank" title="Otworzy się w nowej karcie" rel="noopener">
+                                    Informacja o działalności Ministerstwa
+                                </a>
+                            </li>
+                            <li class="akmf-footer__links-item">
+                                <a class="akmf-footer__link" href="https://podatki.gov.pl" target="_blank" title="Otworzy się w nowej karcie" rel="noopener">
+                                    Podatki.gov.pl
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+
+                    <div class="akmf-footer__help-container">
+                        <div>
+                            <span class="akmf-footer__app-logo akmf-helper__no-wrap">
+                                <img src="assets/img/ksef-logo.svg" alt="MF Logo">
+                            </span>
+                            <a target="_blank" class="akmf-btn-main-invert akmf-footer__help-btn akmf-helper__no-wrap akmf-btn__max-width-for-mobile" href="https://ksef.podatki.gov.pl/formularz/">
+                                Skontaktuj się z nami
+                            </a>
+                        </div>
+                    </div>
+
+                    <div class="akmf-footer__brands-container">
+                        <img src="assets/img/kpo-brand.svg" class="akmf-footer__kpo-brand" alt="Logo Fundusze Europejskie">
+                        <img src="assets/img/rp-brand.svg" class="akmf-footer__rp-brand" alt="Flaga Rzeczypospolitej Polskiej">
+                        <img src="assets/img/ue-brand.svg" class="akmf-footer__ue-brand" alt="Logo Unia Europejska - Europejski Fundusz Rozwoju Regionalnego">
+                    </div>
+
+                </div>
+            </footer>
+        </akmf-footer>
+
+    </div>
+<script type="text/javascript" src="/_Incapsula_Resource?SWJIYLWA=719d34d31c8e3a6e6fffd425f7e032f3&amp;ns=1&amp;cb=1998301538" async=""></script>
+
+</body></html>
