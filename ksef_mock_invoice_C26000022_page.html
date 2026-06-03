@@ -1,187 +1,250 @@
-<html lang="en"><head>
-    <meta charset="utf-8">
-    <title>KSeF</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <base href="/client-app/">
-    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Material+Icons+Outlined" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/choices.js/10.2.0/choices.min.css">
-    <link rel="stylesheet" href="app.css">
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/choices.js/10.2.0/choices.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.3/jquery.validate.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validation-unobtrusive/3.2.12/jquery.validate.unobtrusive.js"></script>
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>KSeF Invoice Verification (Mock)</title>
+  <style>
+    :root {
+      --bg: #f4f7fb;
+      --card: #ffffff;
+      --primary: #0b57d0;
+      --primary-dark: #083b8a;
+      --text: #1f2937;
+      --muted: #6b7280;
+      --border: #dbe3ee;
+      --success: #0f9d58;
+      --tag: #e8f0fe;
+      --shadow: 0 10px 30px rgba(0,0,0,.08);
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font-family: Arial, Helvetica, sans-serif;
+      background: linear-gradient(180deg, #eef4ff 0%, var(--bg) 100%);
+      color: var(--text);
+    }
+    .wrap {
+      max-width: 920px;
+      margin: 0 auto;
+      padding: 32px 20px 48px;
+    }
+    .banner {
+      background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
+      color: #fff;
+      border-radius: 18px;
+      padding: 24px 28px;
+      box-shadow: var(--shadow);
+      margin-bottom: 22px;
+    }
+    .banner h1 {
+      margin: 0 0 8px;
+      font-size: 28px;
+      line-height: 1.2;
+    }
+    .banner p {
+      margin: 0;
+      color: rgba(255,255,255,.92);
+      font-size: 15px;
+    }
+    .grid {
+      display: grid;
+      grid-template-columns: 1.4fr 0.8fr;
+      gap: 22px;
+    }
+    .card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 18px;
+      box-shadow: var(--shadow);
+      overflow: hidden;
+    }
+    .card-header {
+      padding: 20px 24px 10px;
+    }
+    .card-title {
+      margin: 0;
+      font-size: 22px;
+    }
+    .card-subtitle {
+      margin: 8px 0 0;
+      color: var(--muted);
+      font-size: 14px;
+    }
+    .status {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: #eaf7ef;
+      color: var(--success);
+      border: 1px solid #bee6cb;
+      border-radius: 999px;
+      padding: 8px 14px;
+      font-weight: bold;
+      font-size: 14px;
+      margin: 16px 24px 0;
+    }
+    .status .dot {
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      background: var(--success);
+    }
+    .details {
+      padding: 18px 24px 26px;
+      display: grid;
+      grid-template-columns: 220px 1fr;
+      row-gap: 14px;
+      column-gap: 16px;
+      align-items: start;
+    }
+    .label {
+      color: var(--muted);
+      font-size: 14px;
+      font-weight: bold;
+    }
+    .value {
+      font-size: 15px;
+      line-height: 1.5;
+      word-break: break-word;
+    }
+    .mono {
+      font-family: Consolas, Monaco, monospace;
+      font-size: 14px;
+      background: #f8fafc;
+      border: 1px dashed var(--border);
+      border-radius: 10px;
+      padding: 10px 12px;
+    }
+    .side {
+      padding: 24px;
+    }
+    .mini-title {
+      margin: 0 0 16px;
+      font-size: 18px;
+    }
+    .tag {
+      display: inline-block;
+      background: var(--tag);
+      color: var(--primary-dark);
+      border: 1px solid #c9dafc;
+      padding: 8px 12px;
+      border-radius: 999px;
+      font-size: 13px;
+      font-weight: bold;
+      margin-bottom: 14px;
+    }
+    .note {
+      background: #f9fbff;
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 16px;
+      color: var(--text);
+      font-size: 14px;
+      line-height: 1.6;
+    }
+    .footer {
+      margin-top: 18px;
+      color: var(--muted);
+      font-size: 12px;
+      line-height: 1.6;
+    }
+    .toolbar {
+      margin-top: 18px;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+    .btn {
+      text-decoration: none;
+      display: inline-block;
+      padding: 10px 14px;
+      border-radius: 10px;
+      border: 1px solid var(--border);
+      color: var(--primary-dark);
+      background: white;
+      font-size: 14px;
+      font-weight: bold;
+    }
+    .btn.primary {
+      background: var(--primary);
+      color: white;
+      border-color: var(--primary);
+    }
+    @media (max-width: 760px) {
+      .grid { grid-template-columns: 1fr; }
+      .details { grid-template-columns: 1fr; }
+    }
+  </style>
 </head>
 <body>
-    <header class="akmf-header-simple" tabindex="-1">
-        <img class="akmf-header-simple__eagle" src="assets/img/red-eagle.svg">
-        <span class="akmf-header-simple__title">
-            Krajowy System <span class="text-red">e</span>
-            <span class="text-bold">-Faktur</span>
-        </span>
-    </header>
-    <br>
-    <div class="akmf-main-content akmf-main-content__content">
+  <div class="wrap">
+    <section class="banner">
+      <h1>Dostęp do faktur</h1>
+      <p>Zobacz fakturę wystawioną w Krajowym Systemie e-Faktur bez konieczności logowania.</p>
+    </section>
 
-        <main class="akmf-main-content__content--wrapper" tabindex="-1">
-            
-
-
-
-
-        <div class="tilte-container">
-            <h1>
-                Dostęp do faktur
-            </h1>
-            <p>
-                Zobacz fakturę wystawioną w Krajowym Systemie e-Faktur bez
-                konieczności logowania.
-            </p>
+    <div class="grid">
+      <section class="card">
+        <div class="card-header">
+          <h2 class="card-title">Informacje o fakturze</h2>
+          <p class="card-subtitle">Mock page for QR verification / API & PDF test</p>
         </div>
-        <akmf-alert akmf-alert-design-mode="design-1">
-            <div class="akmf-alert akmf-alert--success">
-                <div class="akmf-alert__title--wrapper">
-                    <span class="title__icon title__icon--left title__icon--left-success">
-                        check_circle_outline
-                    </span>
-                    <div class="akmf-alert__title h6">Faktura znajduje się w KSeF</div>
-                </div>
-            </div>
-        </akmf-alert>
-        <p style="font-size: 32px">Informacje o fakturze</p>
-        <div class="invoice-details">
-            <div class="row">
-                <div class="info">
-                    <span class="label">Numer KSeF</span>
-                    <span class="text">5865290412-20260603-19925772CDE3-97</span>
-                </div>
-                <div class="info">
-                    <span class="label">NIP sprzedawcy</span>
-                    <span class="text">5865290412</span>
-                </div>
-                <div class="info">
-                    <span class="label">INV</span>
-                    <span class="text">C26000022</span>
-                </div>              
-                <div class="info">
-                    <span class="label">Data wystawienia faktury</span>
-                    <span class="text">03.06.2026</span>
-                </div>
-            </div>
 
-            <div class="row">
-                <div class="info">
-                    <span class="label">Skrót dokumentu</span>
-                    <span class="text">H9jP1XfuRRGwDmpV0Z4pi36Zr7EzOg85EJz5Kv+aBc8=</span>
-                </div>
-                <div class="info">
-                    <span class="label">Data nadania nr KSeF</span>
-                    <span class="text">03.06.2026</span>
-                </div>
-                <div class="info">
-                    <span class="label">Typ schemy</span>
-                    <span class="text">FA (3)</span>
-                </div>
-            </div>
-
-            <div class="row">
-                <div class="info">
-                    <span class="label">Tryb wystawienia faktury</span>
-                    <span class="text">Online</span>
-                </div>
-                <div class="info">
-                    <span class="label">Dokument przesłany do KSeF jest zgodny z dokumentem, dla którego wygenerowano link weryfikacyjny </span>
-                    <span class="text">Tak</span>
-                </div>
-                <div class="info">
-                </div>
-            </div>
+        <div class="status">
+          <span class="dot"></span>
+          Dokument zweryfikowany
         </div>
-        <form method="post">
+
+        <div class="details">
+          <div class="label">ksefNumber</div>
+          <div class="value mono">5865290412-20260603-19925772CDE3-97</div>
+         
+          <div class="label">INV</div>
+          <div class="value mono">C26000022</div>
             
-            <input type="hidden" id="Nip" name="Nip" value="5865290412">
-            <input type="hidden" id="IssueDate" name="IssueDate" value="03-06-2026">
-            <input type="hidden" id="InvoiceHash" name="InvoiceHash" value="H9jP1XfuRRGwDmpV0Z4pi36Zr7EzOg85EJz5Kv+aBc8=">
-            <input type="hidden" id="KsefNumber" name="KsefNumber" value="5865290412-20260603-19925772CDE3-97">
-            <div>
-                <button type="submit" style="margin-left: 0px;" class="akmf-btn-main">
-                    Przejdź do pobierania
-                </button>
-            </div>
-        <input name="__RequestVerificationToken" type="hidden" value="CfDJ8BW0GgtUQZNFr79HKBP3DDNaKOYiwxAGhjp-quLGT1CY6MDV1nv0Vr57Kxa00pLt6LnBoBXNnhldGsRWntt5AsD6NN2Zlz9KTCaPh5LeXd9EqiPJEPMFr86QfWxa34f2PPmyMd4RgAo9bOBOQNUbmDU"></form>
+          <div class="label">NIP sprzedawcy</div>
+          <div class="value">5865290412</div>
 
-        </main>
+          <div class="label">Data wystawienia faktury</div>
+          <div class="value">03.06.2026</div>
 
-        <akmf-footer>
-            <footer tabindex="-1" id="akmf-app-footer" class="akmf-footer__footer">
-                <div class="akmf-footer__container">
+          <div class="label">Skrót dokumentu</div>
+          <div class="value mono">H9jP1XfuRRGwDmpV0Z4pi36Zr7EzOg85EJz5Kv+aBc8=</div>
 
-                    <div class="akmf-footer__logo-container">
-                        <a target="_blank" href="https://www.gov.pl/web/finanse/" class="akmf-footer__logo">
-                            <img src="assets/img/mf-brand.svg" alt="Logo Ministerstwa Finansów">
-                        </a>
-                        <a target="_blank" href="https://www.gov.pl/web/kas/" class="akmf-footer__logo">
-                            <img src="assets/img/kas-brand.svg" alt="Logo Krajowej Administracji Skarbowej">
-                        </a>
-                    </div>
+          <div class="label">Data nadania nr KSeF</div>
+          <div class="value">03.06.2026</div>
 
-                    <div class="akmf-footer__links-container">
-                        <ul class="akmf-footer__links">
-                            <li class="akmf-footer__links-item">
-                                <a class="akmf-footer__link" href="https://ap-demo.ksef.mf.gov.pl/web/site-map" )"="" target="_self" title="Przejdź do mapy strony" rel="opener">
-                                    Mapa strony
-                                </a>
-                            </li>
-                            <li class="akmf-footer__links-item">
-                                <a class="akmf-footer__link" href="https://ap-demo.ksef.mf.gov.pl/web/wcag-declaration" target="_blank" title="Otworzy się w nowej karcie" rel="noopener">
-                                    Deklaracja dostępności serwisu
-                                </a>
-                            </li>
-                            <li class="akmf-footer__links-item">
-                                <a class="akmf-footer__link" href="https://ap-demo.ksef.mf.gov.pl/web/cookies-policy" target="_blank" title="Otworzy się w nowej karcie" rel="noopener">
-                                    Polityka Cookie
-                                </a>
-                            </li>
-                            <li class="akmf-footer__links-item">
-                                <a class="akmf-footer__link" href="https://ap-demo.ksef.mf.gov.pl/web/kas-clause" target="_blank" title="Otworzy się w nowej karcie" rel="noopener">
-                                    Klauzula informacyjna Szefa Krajowej Administracji Skarbowej
-                                </a>
-                            </li>
-                            <li class="akmf-footer__links-item">
-                                <a class="akmf-footer__link" href="https://www.gov.pl/web/finanse/informacja-o-dzialalnosci-ministerstwa" target="_blank" title="Otworzy się w nowej karcie" rel="noopener">
-                                    Informacja o działalności Ministerstwa
-                                </a>
-                            </li>
-                            <li class="akmf-footer__links-item">
-                                <a class="akmf-footer__link" href="https://podatki.gov.pl" target="_blank" title="Otworzy się w nowej karcie" rel="noopener">
-                                    Podatki.gov.pl
-                                </a>
-                            </li>
-                        </ul>
-                    </div>
+          <div class="label">Typ schemy</div>
+          <div class="value">FA</div>
 
-                    <div class="akmf-footer__help-container">
-                        <div>
-                            <span class="akmf-footer__app-logo akmf-helper__no-wrap">
-                                <img src="assets/img/ksef-logo.svg" alt="MF Logo">
-                            </span>
-                            <a target="_blank" class="akmf-btn-main-invert akmf-footer__help-btn akmf-helper__no-wrap akmf-btn__max-width-for-mobile" href="https://ksef.podatki.gov.pl/formularz/">
-                                Skontaktuj się z nami
-                            </a>
-                        </div>
-                    </div>
+          <div class="label">Tryb wystawienia faktury</div>
+          <div class="value">Online</div>
 
-                    <div class="akmf-footer__brands-container">
-                        <img src="assets/img/kpo-brand.svg" class="akmf-footer__kpo-brand" alt="Logo Fundusze Europejskie">
-                        <img src="assets/img/rp-brand.svg" class="akmf-footer__rp-brand" alt="Flaga Rzeczypospolitej Polskiej">
-                        <img src="assets/img/ue-brand.svg" class="akmf-footer__ue-brand" alt="Logo Unia Europejska - Europejski Fundusz Rozwoju Regionalnego">
-                    </div>
+          <div class="label">Zgodność dokumentu</div>
+          <div class="value">Tak — dokument przesłany do KSeF jest zgodny z dokumentem, dla którego wygenerowano link weryfikacyjny.</div>
+        </div>
+      </section>
 
-                </div>
-            </footer>
-        </akmf-footer>
+      <aside class="card side">
+        <div class="tag">KSeF Mock</div>
+        <h3 class="mini-title">Quick Notes</h3>
+        <div class="note">
+          This is a mock invoice verification page for testing QR code flows, PDF embedding, and UI presentation.
+          <br /><br />
+          You can host this HTML on any internal web server / SharePoint static page / mock site, then encode the hosted URL into a QR code.
+        </div>
 
+        <div class="toolbar">
+          <a class="btn primary" href="#">Open XML</a>
+          <a class="btn" href="#">Download PDF</a>
+        </div>
+
+        <div class="footer">
+          Tip: If you want a more realistic QR flow, keep the QR content as a URL only, and let this page present the details in a clean UI.
+        </div>
+      </aside>
     </div>
-<script type="text/javascript" src="/_Incapsula_Resource?SWJIYLWA=719d34d31c8e3a6e6fffd425f7e032f3&amp;ns=1&amp;cb=1998301538" async=""></script>
-
-</body></html>
+  </div>
+</body>
+</html>
